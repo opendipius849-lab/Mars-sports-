@@ -11,11 +11,13 @@ import {
   TrendingUp,
   Shield,
   Flame,
+  Award,
 } from 'lucide-react';
 import { Match, PredictionData } from '../types';
 import { PitchLineup } from './PitchLineup';
 import { RadarChart } from './RadarChart';
 import { MatchHeatmap } from './MatchHeatmap';
+import { MvpTracker } from './MvpTracker';
 
 interface MatchDetailModalProps {
   match: Match | null;
@@ -36,7 +38,7 @@ export const MatchDetailModal: React.FC<MatchDetailModalProps> = ({
   isSubscribed = false,
   onToggleNotification,
 }) => {
-  const [activeTab, setActiveTab] = useState<'ai' | 'timeline' | 'lineups' | 'stats' | 'h2h' | 'heatmap'>('ai');
+  const [activeTab, setActiveTab] = useState<'ai' | 'timeline' | 'lineups' | 'stats' | 'h2h' | 'heatmap' | 'mvp'>('ai');
 
   if (!match) return null;
 
@@ -209,6 +211,17 @@ export const MatchDetailModal: React.FC<MatchDetailModalProps> = ({
           >
             <Flame className="w-3.5 h-3.5 text-rose-400" />
             <span>Pitch Heatmap</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('mvp')}
+            className={`flex items-center gap-1.5 py-3 px-3.5 text-xs font-bold border-b-2 whitespace-nowrap transition-colors ${
+              activeTab === 'mvp'
+                ? 'border-blue-500 text-blue-400'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Award className="w-3.5 h-3.5 text-amber-400" />
+            <span>MVP Tracker</span>
           </button>
         </div>
 
@@ -418,6 +431,11 @@ export const MatchDetailModal: React.FC<MatchDetailModalProps> = ({
           {/* TAB 6: HEATMAP */}
           {activeTab === 'heatmap' && (
             <MatchHeatmap match={match} />
+          )}
+
+          {/* TAB 7: MVP TRACKER */}
+          {activeTab === 'mvp' && (
+            <MvpTracker match={match} />
           )}
         </div>
       </div>
