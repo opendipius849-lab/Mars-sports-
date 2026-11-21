@@ -1,0 +1,6 @@
+{
+  "name": "MARS SPORTS",
+  "description": "MARS SPORTS - Real-time live scores, fixtures, standings, and AI-powered match predictions with world consensus percentages and graphical tactical analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
